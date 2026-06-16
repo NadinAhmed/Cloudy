@@ -8,9 +8,14 @@
 import Foundation
 import SwiftUI
 
-class NetworkManger {
-    static let shared = NetworkManger()
-    private init() {}
+protocol NetworkMangerProtocol {
+    func request<T: Decodable>(
+        _ endpoint: String,
+        queryItem: [URLQueryItem]
+    ) async throws -> T
+}
+
+class NetworkManger: NetworkMangerProtocol {
 
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
@@ -24,15 +29,15 @@ class NetworkManger {
     func request<T: Decodable>(
         _ endpoint: String,
         queryItem: [URLQueryItem] = []
-    ) async -> Result<T, APIError> {
+    ) async throws -> T {
 
         guard var component = URLComponents(
                 string: APIConstants.baseURL + endpoint
             )
-        else { return .failure(.invalidURL) }
+        else { throw APIError.invalidURL }
         component.queryItems = queryItem
 
-        guard let url = component.url else { return .failure(.invalidURL) }
+        guard let url = component.url else { throw APIError.invalidURL }
 
         let request = interceptor.adapt(URLRequest(url: url))
 
@@ -40,30 +45,30 @@ class NetworkManger {
             let (data, responce) = try await session.data(for: request)
 
             guard let http = responce as? HTTPURLResponse else {
-                return .failure(.unknown(URLError(.badServerResponse)))
+                throw APIError.unknown(URLError(.badServerResponse))
             }
             switch http.statusCode {
             case 200...299:
                 break
             case 401:
-                return .failure(.unauthorized)
+                throw APIError.unauthorized
             case 404:
-                return .failure(.notFound)
+                throw APIError.notFound
             case 500...599:
-                return .failure(.serverError(http.statusCode))
+                throw APIError.serverError(http.statusCode)
             default:
-                return .failure(.serverError(http.statusCode))
+                throw APIError.serverError(http.statusCode)
             }
 
             let decode = try JSONDecoder().decode(T.self, from: data)
-            return .success(decode)
+            return decode
 
         } catch is URLError {
-            return .failure(.noInternetConnection)
+            throw APIError.noInternetConnection
         } catch is DecodingError {
-            return .failure(.decodingFailed)
+            throw APIError.decodingFailed
         } catch {
-            return .failure(.unknown(error))
+            throw APIError.unknown(error)
         }
     }
 }

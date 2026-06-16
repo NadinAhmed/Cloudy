@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D54DC9FE2FE1D3F00095629E /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = D54DC9FD2FE1D3F00095629E /* Swinject */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		D56D488C2FDA4CAA002D9C08 /* Cloudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cloudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D54DC9FE2FE1D3F00095629E /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = Cloudy;
 			packageProductDependencies = (
+				D54DC9FD2FE1D3F00095629E /* Swinject */,
 			);
 			productName = Cloudy;
 			productReference = D56D488C2FDA4CAA002D9C08 /* Cloudy.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = D56D48832FDA4CA9002D9C08;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D54DC9FC2FE1D3F00095629E /* XCRemoteSwiftPackageReference "Swinject" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D56D488D2FDA4CAA002D9C08 /* Products */;
 			projectDirPath = "";
@@ -140,6 +149,8 @@
 /* Begin XCBuildConfiguration section */
 		D56D48972FDA4CAC002D9C08 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D56D488E2FDA4CAA002D9C08 /* Cloudy */;
+			baseConfigurationReferenceRelativePath = Resources/Secrets.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -203,6 +214,8 @@
 		};
 		D56D48982FDA4CAC002D9C08 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D56D488E2FDA4CAA002D9C08 /* Cloudy */;
+			baseConfigurationReferenceRelativePath = Resources/Secrets.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -259,6 +272,8 @@
 		};
 		D56D489A2FDA4CAC002D9C08 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D56D488E2FDA4CAA002D9C08 /* Cloudy */;
+			baseConfigurationReferenceRelativePath = Resources/Secrets.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -287,6 +302,8 @@
 		};
 		D56D489B2FDA4CAC002D9C08 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D56D488E2FDA4CAA002D9C08 /* Cloudy */;
+			baseConfigurationReferenceRelativePath = Resources/Secrets.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -335,6 +352,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D54DC9FC2FE1D3F00095629E /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D54DC9FD2FE1D3F00095629E /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D54DC9FC2FE1D3F00095629E /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D56D48842FDA4CA9002D9C08 /* Project object */;
 }
