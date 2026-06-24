@@ -14,10 +14,12 @@ struct HomeScreen: View {
     )!
 
     var body: some View {
-        contentView
-            .task {
-                await viewModel.fetchWeatherForecast()
-            }
+        NavigationStack {
+            contentView
+        }
+        .task {
+            await viewModel.fetchWeatherForecast()
+        }
     }
 
     @ViewBuilder
@@ -47,8 +49,16 @@ struct HomeScreen: View {
 
                             Divider().background(.white.opacity(0.5))
 
-                            ForEach(forecast.days) { day in
-                                DayForecastView(forecast: day)
+                            ForEach(forecast.days, id: \.id) { day in
+                                NavigationLink {
+                                    HourlyForecastScreen(
+                                        day: day,
+                                        isMorning: isMorning
+                                    )
+                                } label: {
+                                    DayForecastView(forecast: day)
+                                }
+                                .buttonStyle(.plain)
                             }
                         }
                         .background(
@@ -56,9 +66,9 @@ struct HomeScreen: View {
                                 .fill(Color.white.opacity(0.15))
                         )
                     }
-                    
+
                     Spacer(minLength: 16)
-                    
+
                     let columns = [
                         GridItem(.flexible(), spacing: 16),
                         GridItem(.flexible(), spacing: 16),

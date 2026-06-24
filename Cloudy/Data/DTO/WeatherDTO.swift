@@ -14,14 +14,14 @@ struct WeatherDTO: Decodable {
     let isDay: Int
     let condition: WeatherConditionDTO
     let windKph: Double
-    let pressureMB: Int
+    let pressureMB: Double
     let humidity: Int
     let feelslikeC: Double
     let visKM: Double
 
     enum CodingKeys: String, CodingKey {
         case lastUpdatedEpoch = "last_updated_epoch"
-        case time = "time"
+        case time 
         case tempC = "temp_c"
         case isDay = "is_day"
         case condition

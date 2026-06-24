@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Weather {
+struct Weather : Identifiable {
+    var id: String { time ?? UUID().uuidString }
     let lastUpdatedEpoch: Int?
     let time: String?
     var formattedHour: String {
@@ -25,7 +26,7 @@ struct Weather {
     let isDay: Int
     let condition: WeatherCondition
     let windKph: Double
-    let pressureMB: Int
+    let pressureMB: Double
     let humidity: Int
     let feelslikeC: Double
     let visKM: Double

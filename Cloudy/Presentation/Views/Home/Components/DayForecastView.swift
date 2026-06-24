@@ -33,36 +33,3 @@ struct DayForecastView: View {
         .padding(.vertical, 12)
     }
 }
-
-#Preview {
-    DayForecastView(
-        forecast: ForecastDay(
-            date: "Today",
-            dateEpoch: 0,
-            maxtempC: 24,
-            mintempC: 16,
-            avgtempC: 20,
-            maxwindKph: 39,
-            avgvisKM: 20,
-            condition: WeatherCondition(text: "", icon: "", code: 1),
-            hours: [
-                Weather(
-                    lastUpdatedEpoch: 0, time: "",
-                    tempC: 2,
-                    isDay: 0,
-                    condition: WeatherCondition(
-                        text: "",
-                        icon:
-                            "https://cdn.weatherapi.com/weather/64x64/night/113.png",
-                        code: 1
-                    ),
-                    windKph: 23,
-                    pressureMB: 12,
-                    humidity: 43,
-                    feelslikeC: 43,
-                    visKM: 65
-                )
-            ]
-        )
-    )
-}

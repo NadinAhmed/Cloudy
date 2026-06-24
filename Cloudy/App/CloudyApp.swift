@@ -24,10 +24,12 @@ struct CloudyApp: App {
     private func setupFont() {
         let appearance = UINavigationBar.appearance()
         appearance.largeTitleTextAttributes = [
-            .font: SwiftUI.Font.custom("Inter-Bold", size: 34)
+            .font: UIFont(name: "Inter-Bold", size: 34)
+                ?? .systemFont(ofSize: 34, weight: .bold)
         ]
         appearance.titleTextAttributes = [
-            .font: SwiftUI.Font.custom("Inter-SemiBold", size: 17)
+            .font: UIFont(name: "Inter-SemiBold", size: 17)
+                ?? .systemFont(ofSize: 17, weight: .semibold)
         ]
     }
 
