@@ -16,6 +16,7 @@ struct LocationSearchScreen: View {
     @State private var viewModel = DIContainer.shared.container.resolve(
         LocationSearchViewModel.self
     )!
+    @State private var searchTask: Task<Void, Never>?
 
     var body: some View {
         Group {
@@ -41,13 +42,23 @@ struct LocationSearchScreen: View {
             placement: .navigationBarDrawer(displayMode: .always),
             prompt: "Search for a city"
         )
-        .onSubmit(of: .search) {
-            Task { await viewModel.search() }
-        }
         .onChange(of: viewModel.query) { _, newValue in
-            if newValue.trimmingCharacters(in: .whitespaces).isEmpty {
+            searchTask?.cancel()
+
+            guard !newValue.trimmingCharacters(in: .whitespaces).isEmpty else {
                 viewModel.clear()
+                return
             }
+
+            searchTask = Task {
+                // Debounce: wait briefly so we don't fire on every keystroke.
+                try? await Task.sleep(for: .milliseconds(350))
+                guard !Task.isCancelled else { return }
+                await viewModel.search()
+            }
+        }
+        .onDisappear {
+            searchTask?.cancel()
         }
     }
 
