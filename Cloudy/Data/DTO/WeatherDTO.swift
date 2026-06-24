@@ -9,6 +9,7 @@ import Foundation
 
 struct WeatherDTO: Decodable {
     let lastUpdatedEpoch: Int?
+    let time: String?
     let tempC: Double
     let isDay: Int
     let condition: WeatherConditionDTO
@@ -20,6 +21,7 @@ struct WeatherDTO: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case lastUpdatedEpoch = "last_updated_epoch"
+        case time = "time"
         case tempC = "temp_c"
         case isDay = "is_day"
         case condition
@@ -35,6 +37,7 @@ extension WeatherDTO {
     func toDomainModel() -> Weather {
         Weather(
             lastUpdatedEpoch: lastUpdatedEpoch,
+            time: time,
             tempC: tempC,
             isDay: isDay,
             condition: condition.toDomainModel(),

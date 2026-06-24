@@ -9,6 +9,18 @@ import Foundation
 
 struct Weather {
     let lastUpdatedEpoch: Int?
+    let time: String?
+    var formattedHour: String {
+        guard let time = time else { return "" }
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        guard let dateObj = formatter.date(from: time) else { return time }
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "h a"
+        return outputFormatter.string(from: dateObj)
+    }
     let tempC: Double
     let isDay: Int
     let condition: WeatherCondition

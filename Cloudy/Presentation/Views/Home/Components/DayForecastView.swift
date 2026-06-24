@@ -47,7 +47,7 @@ struct DayForecastView: View {
             condition: WeatherCondition(text: "", icon: "", code: 1),
             hours: [
                 Weather(
-                    lastUpdatedEpoch: 0,
+                    lastUpdatedEpoch: 0, time: "",
                     tempC: 2,
                     isDay: 0,
                     condition: WeatherCondition(
