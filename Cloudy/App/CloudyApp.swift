@@ -19,6 +19,7 @@ struct CloudyApp: App {
         WindowGroup {
             HomeScreen()
         }
+        .modelContainer(for: SavedLocation.self)
     }
     
     private func setupFont() {

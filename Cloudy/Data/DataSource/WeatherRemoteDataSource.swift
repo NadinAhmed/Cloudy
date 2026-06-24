@@ -23,7 +23,7 @@ class WeatherRemoteDataSource {
         return try await network.request(APIConstants.forcast, queryItem: items)
     }
 
-    func searchLocation(query: String) async throws -> [LocationDTO] {
+    func searchLocation(query: String) async throws -> [SearchLocationDTO] {
         let items = [
             URLQueryItem(name: "q", value: query)
         ]

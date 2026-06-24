@@ -35,5 +35,10 @@ class DIContainer{
             let repo = r.resolve(WeatherRepoProtocol.self)!
             return HomeViewModel(repo: repo)
         }.inObjectScope(.container)
+
+        container.register(LocationSearchViewModel.self) { r in
+            let repo = r.resolve(WeatherRepoProtocol.self)!
+            return LocationSearchViewModel(repo: repo)
+        }.inObjectScope(.transient)
     }
 }

@@ -16,6 +16,22 @@ struct HomeScreen: View {
     var body: some View {
         NavigationStack {
             contentView
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink {
+                            LocationsScreen { location in
+                                Task {
+                                    await viewModel.selectLocation(
+                                        title: location.displayName,
+                                        query: location.query
+                                    )
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "list.bullet")
+                        }
+                    }
+                }
         }
         .task {
             await viewModel.fetchWeatherForecast()
