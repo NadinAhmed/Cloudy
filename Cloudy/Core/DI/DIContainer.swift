@@ -31,9 +31,14 @@ class DIContainer{
             return WeatherRepo(dataSource: dataSource)
         }.inObjectScope(.container)
         
+        container.register(LocationServiceProtocol.self) { _ in
+            MainActor.assumeIsolated { LocationService() }
+        }.inObjectScope(.container)
+
         container.register(HomeViewModel.self) { r in
             let repo = r.resolve(WeatherRepoProtocol.self)!
-            return HomeViewModel(repo: repo)
+            let locationService = r.resolve(LocationServiceProtocol.self)!
+            return HomeViewModel(repo: repo, locationService: locationService)
         }.inObjectScope(.container)
 
         container.register(LocationSearchViewModel.self) { r in

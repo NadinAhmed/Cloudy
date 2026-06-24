@@ -74,9 +74,9 @@ struct LocationSearchScreen: View {
                                 ? location.name
                                 : "\(location.name), \(location.region)"
                         )
-                        .font(.headline)
+                        .font(AppFont.cardValue)
                         Text(location.country)
-                            .font(.subheadline)
+                            .font(AppFont.cardLabel)
                             .foregroundStyle(.secondary)
                     }
                     Spacer()

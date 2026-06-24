@@ -26,6 +26,10 @@ struct HomeScreen: View {
                                         query: location.query
                                     )
                                 }
+                            } onSelectCurrent: {
+                                Task {
+                                    await viewModel.useCurrentLocation()
+                                }
                             }
                         } label: {
                             Image(systemName: "list.bullet")

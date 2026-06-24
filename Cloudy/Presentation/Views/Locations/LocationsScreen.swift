@@ -14,54 +14,64 @@ struct LocationsScreen: View {
     @Query(sort: \SavedLocation.savedAt) private var locations: [SavedLocation]
 
     let onSelect: (SavedLocation) -> Void
+    let onSelectCurrent: () -> Void
 
     var body: some View {
-        Group {
-            if locations.isEmpty {
-                emptyState
-            } else {
-                locationsList
-            }
-        }
-        .navigationTitle("Locations")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    LocationSearchScreen()
-                } label: {
-                    Image(systemName: "plus")
+        locationsList
+            .navigationTitle("Locations")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        LocationSearchScreen()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
             }
-        }
     }
 
     private var locationsList: some View {
         List {
-            ForEach(locations) { location in
+            Section {
                 Button {
-                    onSelect(location)
+                    onSelectCurrent()
                     dismiss()
                 } label: {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(location.displayName)
-                            .font(.headline)
-                        Text(location.country)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
+                    Label("Current Location", systemImage: "location.fill")
+                        .font(AppFont.cardValue)
                 }
                 .buttonStyle(.plain)
+                .padding(.vertical, 4)
             }
-            .onDelete(perform: deleteLocations)
-        }
-    }
 
-    private var emptyState: some View {
-        ContentUnavailableView {
-            Label("No Saved Locations", systemImage: "mappin.slash")
-        } description: {
-            Text("Tap + to search and add a location.")
+            Section {
+                if locations.isEmpty {
+                    Text("Tap + to search and add a location.")
+                        .font(AppFont.cardValue)
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(locations) { location in
+                        Button {
+                            onSelect(location)
+                            dismiss()
+                        } label: {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(location.displayName)
+                                    .font(AppFont.cardValue)
+                                Text(location.country)
+                                    .font(AppFont.cardLabel)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.vertical, 4)
+                    }
+                    .onDelete(perform: deleteLocations)
+                }
+            } header: {
+                Text("Saved")
+            }
         }
     }
 
