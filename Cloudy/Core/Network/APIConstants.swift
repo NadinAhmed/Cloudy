@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class APIConstants{
-    static let baseURL = "http://api.weatherapi.com/v1/"
+    static let baseURL = "https://api.weatherapi.com/v1/"
     
     static let apiKey = "key"
     static let currentWeather = "current.json"

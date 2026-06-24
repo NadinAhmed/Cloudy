@@ -17,7 +17,7 @@ struct CloudyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeScreen()
         }
     }
     
@@ -32,12 +32,11 @@ struct CloudyApp: App {
     }
 
     private func setupAPIKey() {
-        guard KeychainManager.shared.load(key: "weather_api_key") == nil
-        else { return }
-
-        if let key = Bundle.main.object(
-            forInfoDictionaryKey: "WeatherAPIKey"
-        ) as? String {
+        let key = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY") as? String
+        
+        guard KeychainManager.shared.load(key: "weather_api_key") == nil else { return }
+        
+        if let key = key {
             KeychainManager.shared.save(key: "weather_api_key", value: key)
         }
     }

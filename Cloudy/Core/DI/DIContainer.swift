@@ -30,5 +30,10 @@ class DIContainer{
             let dataSource = r.resolve(WeatherRemoteDataSource.self)!
             return WeatherRepo(dataSource: dataSource)
         }.inObjectScope(.container)
+        
+        container.register(HomeViewModel.self) { r in
+            let repo = r.resolve(WeatherRepoProtocol.self)!
+            return HomeViewModel(repo: repo)
+        }.inObjectScope(.container)
     }
 }

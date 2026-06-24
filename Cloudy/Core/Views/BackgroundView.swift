@@ -9,19 +9,21 @@ import SwiftUI
 
 struct BackgroundView<Content: View>: View {
     let content: Content
-
-    init(@ViewBuilder content: () -> Content) {
+    var isMorning: Bool
+    
+    init(isMorning: Bool, @ViewBuilder content: () -> Content) {
         self.content = content()
+        self.isMorning = isMorning
     }
 
     var body: some View {
         ZStack {
-            Image(AppTheme.backgroundImage(isMorning: AppTheme.isMorning))
+            Image(AppTheme.backgroundImage(isMorning: isMorning))
                 .resizable()
                 .ignoresSafeArea()
 
             content
         }
-        .foregroundColor(AppTheme.textColor(isMorning: AppTheme.isMorning))
+        .foregroundColor(AppTheme.textColor(isMorning: isMorning))
     }
 }
