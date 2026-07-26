@@ -4,6 +4,10 @@ A clean, native iOS weather app built with SwiftUI. Cloudy shows the current
 conditions, an hourly breakdown, and a multi-day forecast for your current
 location or any place you search for and save.
 
+## Demo
+
+[![Watch the demo on YouTube](https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=for-the-badge&logo=youtube)](https://youtube.com/shorts/bBSdiB-K9Hs)
+
 ## Features
 
 - **Current location weather** — automatically detects your location and shows
